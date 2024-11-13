@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import CafePage from './pages/CafePage';
+// import MenuEditor from './pages/MenuEditor';
+import OrderPage from './pages/OrderPage';
+import ModifiersEditor from './pages/ModifiersEditor';
+import PrivateRoute from './PrivateRoute';
+import { AuthProvider } from './AuthContext';
+import MenuEditor from './pages/MenuEditorNew';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/cafe" element={ <CafePage /> } />
+        <Route path="/edit" element={ <MenuEditor /> } />
+        <Route path="/order" element={ <OrderPage /> } />
+        <Route path="/mods" element={ <ModifiersEditor /> } />
+      </Routes>
+    </Router>
   );
 }
 
