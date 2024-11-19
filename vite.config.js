@@ -10,6 +10,7 @@ export default defineConfig(() => {
     },
     server: {
         // https: true,
+        port: 3000,
         open: true
     },
     plugins: [react(), Mkcert()],

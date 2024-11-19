@@ -1,5 +1,9 @@
+README.md
+build
+dist
 node_modules
-Dockerfile
-.env
-npm-debug.log
+LICENSE
+package-lock.json
 .git
+.DS_Store
+.env
