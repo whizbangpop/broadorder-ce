@@ -6,25 +6,20 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@sentry/cli": "^2.38.1",
     "@sentry/react": "^8.36.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "firebase": "^11.0.1",
-    "lucide-react": "^0.454.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
-    "react-scripts": "5.0.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
-    "ui": "github:shadcn/ui",
-    "web-vitals": "^2.1.4"
+    "ui": "github:shadcn/ui"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && npm run sentry:sourcemaps",
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org wplabs --project buntie ./build && sentry-cli sourcemaps upload --org wplabs --project buntie ./build"
@@ -48,6 +43,9 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.14"
+    "@vitejs/plugin-react": "^4.3.3",
+    "tailwindcss": "^3.4.14",
+    "vite": "^5.4.11",
+    "vite-plugin-mkcert": "^1.17.6"
   }
 }

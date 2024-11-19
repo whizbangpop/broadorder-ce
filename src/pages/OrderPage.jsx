@@ -4,7 +4,7 @@ import { db } from '../firebase';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
 
 // Modal Component
-const Modal = ({ isOpen, onClose, item, modifiers, syrups, onOrderPlace }) => {
+const Modal = ({ isOpen, onClose, item, modifiers, onOrderPlace }) => {
   const [selectedModifiers, setSelectedModifiers] = useState({
     milk: 'none',
     sugar: 'none',
@@ -100,6 +100,7 @@ const Modal = ({ isOpen, onClose, item, modifiers, syrups, onOrderPlace }) => {
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
+            <p>All syrups are priced at <strong>20p per pump</strong>.</p>
           </div>
 
           {/* Iced Option */}
@@ -119,8 +120,6 @@ const Modal = ({ isOpen, onClose, item, modifiers, syrups, onOrderPlace }) => {
               onChange={(e) => setSelectedModifiers({ ...selectedModifiers, isIced: e.target.checked })}
             />
           </div>
-
-          {console.log(syrups)}
 
           {/* Additional Notes */}
           <div className="mb-2">
@@ -170,7 +169,7 @@ function Menu() {
     };
 
     const fetchModifiers = async () => {
-      const modifierTypes = ['milk', 'sugar'];
+      const modifierTypes = ['milk', 'sugar', 'syrup'];
       const fetchedModifiers = {};
       
       for (const type of modifierTypes) {
@@ -180,21 +179,8 @@ function Menu() {
       setModifiers(fetchedModifiers);
     };
 
-    const fetchSyrups = async () => {
-      const modifierTypes = ['syrup'];
-      const fetchedModifiers = {};
-      
-      for (const type of modifierTypes) {
-        const data = await getDocs(collection(db, type));
-        fetchedModifiers[type] = data.docs.map((doc) => doc.data());
-      }
-      // console.log(fetchedModifiers)
-      setSyrups(fetchedModifiers);
-    };
-
     fetchMenuItems();
     fetchModifiers();
-    fetchSyrups();
   }, []);
 
   const handleSearch = (event) => {
@@ -230,8 +216,11 @@ function Menu() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Order Drinks</h1>
-
+      <div className="flow-root">
+        <h1 className="text-2xl font-bold mb-4 float-left">Order Drink</h1>
+        <h2 className='text-xl font-bold mb-4 float-right'>BroardOrder CE (Alpha 0.1.0)</h2>
+      </div>
+      
       {/* Search Input */}
       <input
         type="text"

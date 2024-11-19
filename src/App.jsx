@@ -7,8 +7,6 @@ import CafePage from './pages/CafePage';
 // import MenuEditor from './pages/MenuEditor';
 import OrderPage from './pages/OrderPage';
 import ModifiersEditor from './pages/ModifiersEditor';
-import PrivateRoute from './PrivateRoute';
-import { AuthProvider } from './AuthContext';
 import MenuEditor from './pages/MenuEditorNew';
 
 function App() {
