@@ -48,6 +48,7 @@ function OrdersPage() {
       sugar: modifiers.sugar || 'None',
       syrup: modifiers.syrup || 'None',
       iced: modifiers.isIced ? 'Yes' : 'No',
+      allergens: modifiers.allergens ? 'Yes' : 'No'
     };
 
     return (
@@ -57,6 +58,7 @@ function OrdersPage() {
           <div><strong>Sugar:</strong> {staticModifiers.sugar}</div>
           <div><strong>Syrup:</strong> {staticModifiers.syrup}</div>
           <div><strong>Iced:</strong> {staticModifiers.iced}</div>
+          <div><strong>Allergens:</strong> {staticModifiers.allergens}</div>
         </div>
         <div className="mt-2"><strong>Notes:</strong> {modifiers.otherNotes || 'None'}</div>
       </div>

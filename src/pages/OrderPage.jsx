@@ -10,6 +10,7 @@ const Modal = ({ isOpen, onClose, item, modifiers, onOrderPlace }) => {
     sugar: 'none',
     syrup: 'none',
     isIced: false,
+    allergens: false,
     otherNotes: '',
   });
   const [customerName, setCustomerName] = useState('');
@@ -68,7 +69,9 @@ const Modal = ({ isOpen, onClose, item, modifiers, onOrderPlace }) => {
               onChange={(e) => setSelectedModifiers({ ...selectedModifiers, milk: e.target.value })}
               className="border p-1 w-full"
             >
-              {modifiers.milk.map((option) => (
+              {console.log(modifiers.milk)}
+              <option selected value="">None</option>
+              {modifiers.milk.sort().map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
@@ -82,6 +85,7 @@ const Modal = ({ isOpen, onClose, item, modifiers, onOrderPlace }) => {
               onChange={(e) => setSelectedModifiers({ ...selectedModifiers, sugar: e.target.value })}
               className="border p-1 w-full"
             >
+              <option selected value="">None</option>
               {modifiers.sugar.map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
@@ -96,7 +100,8 @@ const Modal = ({ isOpen, onClose, item, modifiers, onOrderPlace }) => {
               onChange={(e) => setSelectedModifiers({ ...selectedModifiers, syrup: e.target.value })}
               className="border p-1 w-full"
             >
-              {modifiers.syrup.map((option) => (
+              <option selected value="">None</option>
+              {modifiers.syrup.sort().map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
@@ -116,8 +121,8 @@ const Modal = ({ isOpen, onClose, item, modifiers, onOrderPlace }) => {
             <label className="mr-2">Allergies (Please Specify):</label>
             <input
               type="checkbox"
-              checked={selectedModifiers.isIced}
-              onChange={(e) => setSelectedModifiers({ ...selectedModifiers, isIced: e.target.checked })}
+              checked={selectedModifiers.allergens}
+              onChange={(e) => setSelectedModifiers({ ...selectedModifiers, allergens: e.target.checked })}
             />
           </div>
 
@@ -164,6 +169,7 @@ function Menu() {
     const fetchMenuItems = async () => {
       const menuData = await getDocs(collection(db, 'menuItems'));
       const items = menuData.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      console.log(items.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)))
       setMenuItems(items);
       setFilteredMenuItems(items); // Initialize filtered menu items
     };
@@ -192,6 +198,7 @@ function Menu() {
   };
 
   const placeOrder = async (itemId, itemName, selectedModifiers, customerName, department, roomNumber) => {
+    console.log(selectedModifiers)
     const orderData = {
       customerName,
       department,
@@ -218,7 +225,7 @@ function Menu() {
     <div className="p-4">
       <div className="flow-root">
         <h1 className="text-2xl font-bold mb-4 float-left">Order Drink</h1>
-        <h2 className='text-xl font-bold mb-4 float-right'>BroardOrder CE (Alpha 0.1.0)</h2>
+        <h2 className='text-xl font-bold mb-4 float-right'>BroardOrder CE (Alpha 0.1.1)</h2>
       </div>
       
       {/* Search Input */}
@@ -230,6 +237,8 @@ function Menu() {
       />
 
       {/* Menu Items */}
+      {/* {filteredMenuItems.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))} */}
+      
       {filteredMenuItems.map((item) => (
         <div key={item.id} className="border p-4 mb-4 flex justify-between items-center">
           <h2 className="text-xl font-semibold">{item.name}</h2>
