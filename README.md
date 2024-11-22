@@ -1,4 +1,10 @@
-# BroadOrder CE
+<div align="center">
+    <a href="https://github.com/whizbangpop/broadorder-ce">
+        <img src="assets/bo-logo1.png" alt="BroadOrder logo">
+    </a>
+
+
+</div>
 
 The open-souce cafe system for school barista teams - or just people who need an easy to use and robust mobile ordering system.
 
